@@ -243,14 +243,16 @@ func (c *Handler) validateTokenClaims(ctx context.Context, claims jwt.Claims, ke
 		)
 	}
 
-	if !claims.Audience.Contains(c.TokenURL) {
-		return errorsx.WithStack(fosite.ErrInvalidGrant.
-			WithHintf(
-				"The JWT in \"assertion\" request parameter MUST contain an \"aud\" (audience) claim containing a value \"%s\" that identifies the authorization server as an intended audience.",
-				c.TokenURL,
-			),
-		)
-	}
+	/*
+		if !claims.Audience.Contains(c.TokenURL) {
+			return errorsx.WithStack(fosite.ErrInvalidGrant.
+				WithHintf(
+					"The JWT in \"assertion\" request parameter MUST contain an \"aud\" (audience) claim containing a value \"%s\" that identifies the authorization server as an intended audience.",
+					c.TokenURL,
+				),
+			)
+		}
+	*/
 
 	if claims.Expiry == nil {
 		return errorsx.WithStack(fosite.ErrInvalidGrant.
